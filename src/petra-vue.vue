@@ -2,7 +2,7 @@
 
 export default /*#__PURE__*/{
   name: 'PetraVue', // vue component name
-  props: ['data', 'onSuccess', 'onClose'],
+  props: ['data', 'onSuccess', 'onClose', 'disabled'],
   data() {
     return {
       myModal:{display: "none"},
@@ -27,12 +27,15 @@ export default /*#__PURE__*/{
       dModalContent :{
         backgroundColor: "#fefefe",
         margin: "auto",
-        padding: "20px",
-        width: "80%",
+        // padding: "20px",
+        width: "90%",
         height: "80%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        position: "relative",
+        maxWidth: "1020px",
+        borderRadius: "0.5rem"
       },
       dIframe :{
         display: "none",
@@ -44,18 +47,22 @@ export default /*#__PURE__*/{
       dModalClose :{
         color: "#aaaaaa",
         position: "absolute",
-        top: "5%",
-        right: "8%",
+        top: "3.5%",
+        right: "3.5%",
         float: "right",
         fontSize: "28px",
         fontWeight: "bold",
         cursor: "pointer",
+        zIndex: "999999",
+        border: "none",
+        outline: "none",
+        background: "none",
       },
       dModal:{
         display: "none",
         position: "fixed",
         zIndex: "1",
-        paddingTop: "20px",
+        // paddingTop: "20px",
         left: "0",
         top: "0",
         width: "100%",
@@ -74,6 +81,10 @@ export default /*#__PURE__*/{
         width: "100px",
         display: "block",
         animation: "loader 1s 1s infinite",
+      },
+      disabledBtn:{
+        opacity:0.4,
+        cursor: 'not-allowed'
       }
     }
   },
@@ -88,7 +99,7 @@ export default /*#__PURE__*/{
 
     openIframe() {
       this.handleAnimation();
-      this.dModal.display = 'block'
+      this.dModal.display = 'flex'
      // this.$refs.dFrame.addEventListener('load', this.handleIframeLoaded, true)
       this.iframeData(this)
     },
@@ -151,7 +162,8 @@ export default /*#__PURE__*/{
   <div>
     <button
         v-html="`${data.title}`"
-        :style="data.button"
+        :style="{...data.button, ...(disabled ? disabledBtn : {})}"
+        :disabled="disabled"
         @mouseover="mover()"
         @mouseleave="moout()"
         @click="openIframe()"
@@ -165,7 +177,12 @@ export default /*#__PURE__*/{
         <div ref="loaderWrapper" id="loaderWrapper" :style="loaderWrapper">
           <img ref="loaderImg" alt="loader" :style="loaderImg" id="loaderImg" src="https://www.thepetra.co/favicon.ico" />
         </div>
-        <span :style="dModalClose" @click="closeModal()">X</span>
+        <!-- <button :style="dModalClose" @click="closeModal()">
+          <svg height="32px" viewBox="0 0 329.26933 329" width="32px" xmlns="http://www.w3.org/2000/svg"><path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/></svg>
+        </button> -->
+        <button :style="dModalClose" @click="closeModal()">
+          <svg height="32px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>
+        </button>
         <iframe
             ref="dFrame"
             :src="`https://checkout.petra.africa/?amount=${data.amount}&email=${data.email}&key=${data.key}&payType=${data.payType ? data.payType + '&id='+data.id : ''}`"

@@ -122,7 +122,7 @@ export default /*#__PURE__*/{
       this.$refs.dFrame.style.display = 'none'
       const loader = this.$refs.loaderImg;
       if (!loader) {
-        loader.setAttribute('src', 'https://www.thepetra.co/favicon.ico')
+        loader.setAttribute('src', 'https://res.cloudinary.com/petra-africa/image/upload/v1609488355/petra-logo/spaces_-MBhp6jTeo09Trf_Xy9A_avatar-1594409940483_dyxrq3.png')
       }
       loader.style.display = 'block'
       loader.animate([
@@ -175,7 +175,7 @@ export default /*#__PURE__*/{
     <div :style="dModal">
       <div :style="dModalContent">
         <div ref="loaderWrapper" id="loaderWrapper" :style="loaderWrapper">
-          <img ref="loaderImg" alt="loader" :style="loaderImg" id="loaderImg" src="https://www.thepetra.co/favicon.ico" />
+          <img ref="loaderImg" alt="loader" :style="loaderImg" id="loaderImg" src="https://res.cloudinary.com/petra-africa/image/upload/v1609488355/petra-logo/spaces_-MBhp6jTeo09Trf_Xy9A_avatar-1594409940483_dyxrq3.png" />
         </div>
         <!-- <button :style="dModalClose" @click="closeModal()">
           <svg height="32px" viewBox="0 0 329.26933 329" width="32px" xmlns="http://www.w3.org/2000/svg"><path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/></svg>
